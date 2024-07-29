@@ -8,19 +8,26 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/ecommerce-admin",
         "index": "apps/ecommerce-admin/src/index.html",
         "browser": "apps/ecommerce-admin/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/ecommerce-admin/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/ecommerce-admin/src/favicon.ico",
           "apps/ecommerce-admin/src/assets"
         ],
-        "styles": ["apps/ecommerce-admin/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/ecommerce-admin/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -67,11 +74,15 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/ecommerce-admin/jest.config.ts"
       }
