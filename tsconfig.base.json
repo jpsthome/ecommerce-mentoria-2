@@ -16,23 +16,27 @@
     "baseUrl": ".",
     "paths": {
       "@ecommerce-mentoria-2/auth-data-access": [
-        "modules/data-access/auth/src/index.ts"
+        "libs/modules/data-access/auth/src/index.ts"
       ],
       "@ecommerce-mentoria-2/auth-form": [
-        "modules/feature/auth/form/src/index.ts"
+        "libs/modules/feature/auth/form/src/index.ts"
       ],
-      "@ecommerce-mentoria-2/home": ["modules/feature/home/src/index.ts"],
-      "@ecommerce-mentoria-2/layout": ["modules/feature/layout/src/index.ts"],
+      "@ecommerce-mentoria-2/home": ["libs/modules/feature/home/src/index.ts"],
+      "@ecommerce-mentoria-2/layout": [
+        "libs/modules/feature/layout/src/index.ts"
+      ],
       "@ecommerce-mentoria-2/product-data-access": [
-        "modules/data-access/product/src/index.ts"
+        "libs/modules/data-access/product/src/index.ts"
       ],
       "@ecommerce-mentoria-2/product-detail": [
-        "modules/feature/product/detail/src/index.ts"
+        "libs/modules/feature/product/detail/src/index.ts"
       ],
       "@ecommerce-mentoria-2/product-search": [
-        "modules/feature/product/search/src/index.ts"
+        "libs/modules/feature/product/search/src/index.ts"
       ],
-      "@ecommerce-mentoria-2/product-ui": ["modules/ui/product/src/index.ts"]
+      "@ecommerce-mentoria-2/product-ui": [
+        "libs/modules/ui/product/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
