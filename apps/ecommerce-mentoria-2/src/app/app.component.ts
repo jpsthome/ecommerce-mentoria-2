@@ -1,4 +1,6 @@
+import { environment } from './../environments/enviroment';
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from '@ecommerce-mentoria-2/layout';
@@ -14,6 +16,7 @@ import { CartComponent } from '@ecommerce-mentoria-2/product-ui';
     ProductSearchComponent,
     MatSnackBarModule,
     CartComponent,
+    MatButtonModule,
   ],
   selector: 'ecommerce-mentoria-2-root',
   templateUrl: './app.component.html',
@@ -21,4 +24,5 @@ import { CartComponent } from '@ecommerce-mentoria-2/product-ui';
 })
 export class AppComponent {
   quantity = inject(CartService).quantity;
+  adminUrl = environment.admin_url;
 }
