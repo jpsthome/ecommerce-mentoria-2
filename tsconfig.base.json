@@ -39,6 +39,9 @@
       ],
       "@ecommerce-mentoria-2/product-ui": [
         "libs/modules/ui/product/src/index.ts"
+      ],
+      "@ecommerce-mentoria-2/user": [
+        "libs/modules/data-access/user/src/index.ts"
       ]
     }
   },
