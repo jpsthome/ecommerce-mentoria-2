@@ -1,16 +1,16 @@
 {
-  "name": "user",
+  "name": "user-ui",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/modules/data-access/user/src",
+  "sourceRoot": "libs/modules/ui/user/src",
   "prefix": "ecommerce-mentoria-2",
-  "tags": ["type:data-access"],
+  "tags": ["type:ui"],
   "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/modules/data-access/user/jest.config.ts"
+        "jestConfig": "libs/modules/ui/user/jest.config.ts"
       }
     },
     "lint": {

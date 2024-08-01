@@ -42,7 +42,8 @@
       ],
       "@ecommerce-mentoria-2/user": [
         "libs/modules/data-access/user/src/index.ts"
-      ]
+      ],
+      "@ecommerce-mentoria-2/user-ui": ["libs/modules/ui/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
