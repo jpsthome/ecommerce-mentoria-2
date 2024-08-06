@@ -1,3 +1,10 @@
-<ecommerce-mentoria-2-user-table
-  [users]="(users$ | async) || []"
-></ecommerce-mentoria-2-user-table>
+<ng-container *ngIf="users$ | async as users; else LoadingTemplate">
+  <ecommerce-mentoria-2-user-table [users]="users || []" />
+</ng-container>
+
+<ng-template #LoadingTemplate>
+  <section class="loading">
+    <mat-spinner diameter="20" />
+    Buscando usuários
+  </section>
+</ng-template>
