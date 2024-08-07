@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { User } from '@ecommerce-mentoria-2/user';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -13,11 +13,17 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'ecommerce-mentoria-2-user-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule],
+  selector: 'ecommerce-mentoria-2-user-table',
   templateUrl: './user-table.component.html',
   styleUrl: './user-table.component.scss',
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    NgOptimizedImage
+  ],
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({ height: '0px', minHeight: '0' })),
@@ -31,8 +37,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserTableComponent {
-  @Input({ required: true }) users: User[] = [];
+  private readonly _cdr = inject(ChangeDetectorRef);
 
+  dataSource!: MatTableDataSource<User>;
+
+  @Input({ required: true }) set users(users: User[]) {
+    this.dataSource = new MatTableDataSource<User>(users);
+    this._cdr.detectChanges();
+  };
+
+  expandedElement: User | null = null;
   displayedColumns: string[] = [
     'avatar',
     'name',
@@ -40,5 +54,4 @@ export class UserTableComponent {
     'createdAt',
     'expand',
   ];
-  expandedElement: User | null = null;
 }
