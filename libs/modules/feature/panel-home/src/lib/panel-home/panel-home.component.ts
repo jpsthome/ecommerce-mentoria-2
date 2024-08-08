@@ -9,7 +9,7 @@ import { UserTableComponent } from '@ecommerce-mentoria-2/user-ui';
   imports: [CommonModule, UserTableComponent, MatProgressSpinner],
   templateUrl: './panel-home.component.html',
   styleUrl: './panel-home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelHomeComponent {
   private userService = inject(UsersService);
