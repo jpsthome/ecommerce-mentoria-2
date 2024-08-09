@@ -3,10 +3,11 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/e2e/src",
+  "tags": [],
+  "implicitDependencies": ["ecommerce-mentoria-2"],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
@@ -24,7 +25,5 @@
         }
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["ecommerce-mentoria-2"]
+  }
 }

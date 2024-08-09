@@ -76,9 +76,8 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ecommerce-mentoria-2/src"]
+        "lintFilePatterns": ["{projectRoot}/src"]
       }
     },
     "test": {
