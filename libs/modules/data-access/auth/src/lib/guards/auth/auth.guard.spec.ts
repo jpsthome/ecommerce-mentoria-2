@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { of } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { authGuard } from './auth.guard';
+import { signal } from '@angular/core';
 
 describe('authGuard', () => {
   it('should return true when user is not truthy', () => {
@@ -11,13 +11,11 @@ describe('authGuard', () => {
     });
 
     TestBed.overrideProvider(AuthService, {
-      useValue: { email$: of(null) },
+      useValue: { email: signal(null) },
     });
 
     const guard = TestBed.runInInjectionContext(authGuard());
-    guard.subscribe((isActivated) => {
-      expect(isActivated).toBe(true);
-    });
+    expect(guard).toBe(true);
   });
 
   it('should NOT return true when user is truthy', () => {
@@ -26,12 +24,11 @@ describe('authGuard', () => {
     });
 
     TestBed.overrideProvider(AuthService, {
-      useValue: { email$: of('mail@mail.com') },
+      useValue: { email: signal(true) },
     });
 
     const guard = TestBed.runInInjectionContext(authGuard());
-    guard.subscribe((isActivated) => {
-      expect(isActivated).not.toBe(true);
-    });
+
+    expect(guard).not.toBe(true);
   });
 });
