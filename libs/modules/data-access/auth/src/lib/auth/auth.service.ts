@@ -1,14 +1,12 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private emailSubject = new BehaviorSubject<string | null>(null);
-  email$ = this.emailSubject.asObservable();
+  email = signal<string | null>(null);
 
   setEmail(email: string): void {
-    this.emailSubject.next(email);
+    this.email.set(email);
   }
 }
