@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { httpErrorsInterceptor } from './interceptors/http-errors.interceptor';
+import { httpAuthInterceptor } from './interceptors/http-auth.interceptor';
 
 registerLocaleData(ptBr);
 
@@ -14,7 +15,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([httpErrorsInterceptor])),
+    provideHttpClient(
+      withInterceptors([httpErrorsInterceptor, httpAuthInterceptor])
+    ),
     {
       provide: LOCALE_ID,
       useValue: 'pt',
