@@ -12,12 +12,12 @@ import {
 } from '@angular/common/http';
 
 import { httpErrorsInterceptor } from './http-errors.interceptor';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '@ecommerce-mentoria-2/notification';
 
 describe('httpErrorsInterceptor', () => {
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
-  let snackBar: MatSnackBar;
+  let notification: NotificationService;
   const interceptor: HttpInterceptorFn = (req, next) =>
     TestBed.runInInjectionContext(() => httpErrorsInterceptor(req, next));
 
@@ -30,7 +30,7 @@ describe('httpErrorsInterceptor', () => {
     });
     httpMock = TestBed.inject(HttpTestingController);
     httpClient = TestBed.inject(HttpClient);
-    snackBar = TestBed.inject(MatSnackBar);
+    notification = TestBed.inject(NotificationService);
   });
 
   it('should be created', () => {
@@ -38,70 +38,62 @@ describe('httpErrorsInterceptor', () => {
   });
 
   it('should open notification on http error', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     httpClient.get('/test').subscribe();
 
     const request = httpMock.expectOne('/test');
     request.error(new ProgressEvent('error'));
 
-    expect(snackBar.open).toHaveBeenCalled();
+    expect(notification.openError).toHaveBeenCalled();
   });
 
   it('should show the correct error message for status 401', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     httpClient.get('/test').subscribe();
 
     const request = httpMock.expectOne('/test');
     request.flush({}, { status: 401, statusText: 'Unauthorized' });
 
-    expect(snackBar.open).toHaveBeenCalledWith(
-      'Você não está mais logado no sistema.',
-      expect.anything(),
-      expect.anything()
+    expect(notification.openError).toHaveBeenCalledWith(
+      'Você não está mais logado no sistema.'
     );
   });
   it('should show the correct error message for status 403', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     httpClient.get('/test').subscribe();
 
     const request = httpMock.expectOne('/test');
     request.flush({}, { status: 403, statusText: 'Unauthorized' });
 
-    expect(snackBar.open).toHaveBeenCalledWith(
-      'Você não possui permissão pra fazer essa ação.',
-      expect.anything(),
-      expect.anything()
+    expect(notification.openError).toHaveBeenCalledWith(
+      'Você não possui permissão pra fazer essa ação.'
     );
   });
   it('should show the correct error message for status 404', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     httpClient.get('/test').subscribe();
 
     const request = httpMock.expectOne('/test');
     request.flush({}, { status: 404, statusText: 'Not Found' });
 
-    expect(snackBar.open).toHaveBeenCalledWith(
-      'Informação solicitada não pode ser encontrada.',
-      expect.anything(),
-      expect.anything()
+    expect(notification.openError).toHaveBeenCalledWith(
+      'Informação solicitada não pode ser encontrada.'
     );
   });
   it('should show the correct error message for others statuses', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     httpClient.get('/test').subscribe();
 
     const request = httpMock.expectOne('/test');
     request.flush({}, { status: 500, statusText: 'Unhandled' });
 
-    expect(snackBar.open).toHaveBeenCalledWith(
-      'Aconteceu algum erro desconhecido.',
-      expect.anything(),
-      expect.anything()
+    expect(notification.openError).toHaveBeenCalledWith(
+      'Aconteceu algum erro desconhecido.'
     );
   });
 
   it('should show the correct error message received from the error', () => {
-    jest.spyOn(snackBar, 'open');
+    jest.spyOn(notification, 'openError');
     const mockErrorResponse = new HttpErrorResponse({
       error: { message: 'Mensagem de erro personalizada' },
       status: 500,
@@ -114,10 +106,8 @@ describe('httpErrorsInterceptor', () => {
     const request = httpMock.expectOne('/test');
     request.error(mockErrorResponse.error as ProgressEvent);
 
-    expect(snackBar.open).toHaveBeenCalledWith(
-      'Mensagem de erro personalizada',
-      expect.anything(),
-      expect.anything()
+    expect(notification.openError).toHaveBeenCalledWith(
+      'Mensagem de erro personalizada'
     );
   });
 
