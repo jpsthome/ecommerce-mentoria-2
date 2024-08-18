@@ -1,0 +1,33 @@
+.lib-notification {
+  &__container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  &__title {
+    font-weight: 500;
+  }
+}
+.snackbar-success {
+  .mdc-snackbar__surface {
+    background-color: #0e9f6e !important;
+  }
+}
+
+.snackbar-error {
+  .mdc-snackbar__surface {
+    background-color: #f05252 !important;
+  }
+}
+
+.snackbar-info {
+  .mdc-snackbar__surface {
+    background-color: #3f83f8 !important;
+  }
+}
+
+.snackbar-warning {
+  .mdc-snackbar__surface {
+    background-color: #f1c40f !important;
+  }
+}
