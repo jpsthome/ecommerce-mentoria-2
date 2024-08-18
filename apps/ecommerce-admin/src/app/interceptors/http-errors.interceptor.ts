@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '@ecommerce-mentoria-2/notification';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
@@ -22,7 +22,7 @@ function getMensagemErro(status: number) {
 }
 
 export const httpErrorsInterceptor: HttpInterceptorFn = (req, next) => {
-  const snackBar = inject(MatSnackBar);
+  const notification = inject(NotificationService);
   const clonedRequest = req.clone();
 
   return next(clonedRequest).pipe(
@@ -34,9 +34,7 @@ export const httpErrorsInterceptor: HttpInterceptorFn = (req, next) => {
       } else {
         errorMessage = getMensagemErro(error.status);
       }
-      snackBar.open(errorMessage, 'Fechar', {
-        duration: 2500,
-      });
+      notification.openError(errorMessage);
       return throwError(() => error);
     })
   );
