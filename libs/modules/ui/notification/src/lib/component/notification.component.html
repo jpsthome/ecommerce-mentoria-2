@@ -1,0 +1,16 @@
+<div class="lib-notification__container">
+  <div>
+    <p class="lib-notification__title">
+      {{ data.title }}
+    </p>
+    <span>
+      {{ data.message }}
+    </span>
+  </div>
+
+  <span matSnackBarActions>
+    <button mat-icon-button matSnackBarAction (click)="snackBarRef.dismiss()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</div>

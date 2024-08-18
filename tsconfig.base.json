@@ -25,6 +25,9 @@
       "@ecommerce-mentoria-2/layout": [
         "libs/modules/feature/layout/src/index.ts"
       ],
+      "@ecommerce-mentoria-2/notification": [
+        "libs/modules/ui/notification/src/index.ts"
+      ],
       "@ecommerce-mentoria-2/panel-home": [
         "libs/modules/feature/panel-home/src/index.ts"
       ],
