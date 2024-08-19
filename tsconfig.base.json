@@ -21,6 +21,9 @@
       "@ecommerce-mentoria-2/auth-form": [
         "libs/modules/feature/auth/form/src/index.ts"
       ],
+      "@ecommerce-mentoria-2/color-theme": [
+        "libs/modules/ui/color-theme/src/index.ts"
+      ],
       "@ecommerce-mentoria-2/home": ["libs/modules/feature/home/src/index.ts"],
       "@ecommerce-mentoria-2/layout": [
         "libs/modules/feature/layout/src/index.ts"
