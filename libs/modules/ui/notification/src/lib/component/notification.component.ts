@@ -35,7 +35,7 @@ import { NotificationData } from '../models/notification-data.model';
 export class NotificationComponent {
   snackBarRef = inject(MatSnackBarRef);
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: NotificationData) {}
+data: NotificationData = inject(MAT_SNACK_BAR_DATA);
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler() {
