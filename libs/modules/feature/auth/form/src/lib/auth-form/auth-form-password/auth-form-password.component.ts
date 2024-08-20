@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthService } from '@ecommerce-mentoria-2/auth-data-access';
+import { AuthService, UserCredentials } from '@ecommerce-mentoria-2/auth-data-access';
 import { AuthFormComponent } from '../auth-form.component';
 
 @Component({
@@ -12,16 +12,15 @@ import { AuthFormComponent } from '../auth-form.component';
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './auth-form-password.component.html',
-  styleUrl: './auth-form-password.component.scss',
+  styleUrl: './auth-form-password.component.scss'
 })
 export class AuthFormPasswordComponent {
-  emailValue = inject(AuthFormComponent).form.controls.email.value;
-  control = inject(AuthFormComponent).form.controls.password;
-  authService = inject(AuthService);
-  router = inject(Router);
+  private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
+  form = inject(AuthFormComponent).form;
 
   login(): void {
-    this.authService.setEmail(this.emailValue);
-    this.router.navigate(['/']);
+    this._authService.login(this.form.value as UserCredentials);
+    this._router.navigate(['/']);
   }
 }

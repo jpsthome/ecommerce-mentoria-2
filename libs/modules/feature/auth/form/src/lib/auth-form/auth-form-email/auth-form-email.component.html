@@ -8,11 +8,11 @@
     type="email"
   />
   @if (control.hasError('email') && !control.hasError('required')) {
-  <mat-error data-testid="error-email">Informe um email válido</mat-error>
+    <mat-error data-testid="error-email">Informe um email válido</mat-error>
   } @else if (control.hasError('required')) {
-  <mat-error data-testid="error-required"
-    >O email é <strong>obrigatório</strong></mat-error
-  >
+    <mat-error data-testid="error-required">
+      O email é <strong>obrigatório</strong>
+    </mat-error>
   }
 </mat-form-field>
 

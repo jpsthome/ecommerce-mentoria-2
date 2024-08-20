@@ -1,2 +1,3 @@
-export * from './lib/auth/auth.service';
-export * from './lib/guards/auth/auth.guard';
+export * from './lib/guards';
+export * from './lib/services';
+export * from './lib/models';
