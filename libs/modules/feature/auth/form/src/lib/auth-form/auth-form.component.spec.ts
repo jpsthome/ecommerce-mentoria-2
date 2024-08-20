@@ -18,4 +18,12 @@ describe('AuthFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should logout user when enter to page', () => {
+    jest.spyOn(component['_service'], 'logout');
+
+    component.ngOnInit();
+
+    expect(component['_service'].logout).toHaveBeenCalled();
+  });
 });
