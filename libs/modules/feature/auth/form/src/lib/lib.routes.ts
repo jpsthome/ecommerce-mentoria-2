@@ -1,12 +1,11 @@
 import { Route } from '@angular/router';
-import { authGuard } from '@ecommerce-mentoria-2/auth-data-access';
+import { emailInsertedGuard } from '@ecommerce-mentoria-2/auth-data-access';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 
 export const authFormRoutes: Route[] = [
   {
     path: '',
     component: AuthFormComponent,
-    canActivate: [authGuard()],
     children: [
       {
         path: 'email',
@@ -21,6 +20,7 @@ export const authFormRoutes: Route[] = [
           import(
             './auth-form/auth-form-password/auth-form-password.component'
           ).then((c) => c.AuthFormPasswordComponent),
+        canActivate: [emailInsertedGuard]
       },
       {
         path: '',
@@ -34,5 +34,3 @@ export const authFormRoutes: Route[] = [
     ],
   },
 ];
-
-// localhost:4200/auth

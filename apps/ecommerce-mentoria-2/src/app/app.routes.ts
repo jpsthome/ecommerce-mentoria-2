@@ -19,7 +19,7 @@ export const appRoutes: Route[] = [
       ),
   },
   {
-    path: 'auth',
+    path: 'login',
     loadChildren: () =>
       import('@ecommerce-mentoria-2/auth-form').then((c) => c.authFormRoutes),
   },
