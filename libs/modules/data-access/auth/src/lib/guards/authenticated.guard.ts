@@ -7,8 +7,7 @@ export const authenticatedGuard: CanMatchFn = () => {
   const router = inject(Router);
 
   if (!service.isAuthenticated()) {
-    router.navigateByUrl('/login');
-    return false;
+    return router.navigateByUrl('/login');
   }
 
   return true;
