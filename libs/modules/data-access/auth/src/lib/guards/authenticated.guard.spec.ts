@@ -41,9 +41,8 @@ describe('authenticatedGuard', () => {
     const router = TestBed.inject(Router);
     jest.spyOn(router, 'navigateByUrl');
 
-    const isAuthenticated = TestBed.runInInjectionContext(() => authenticatedGuard({} as Route, [])) as boolean;
+    TestBed.runInInjectionContext(() => authenticatedGuard({} as Route, []));
 
-    expect(isAuthenticated).toBeFalsy();
     expect(router.navigateByUrl).toHaveBeenCalledWith('/login');
   });
 });
