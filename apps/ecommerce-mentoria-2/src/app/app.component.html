@@ -1,11 +1,14 @@
 <ecommerce-mentoria-2-header title="Ecommerce">
   <ecommerce-mentoria-2-product-search> </ecommerce-mentoria-2-product-search>
   <div right class="right-content">
-    <a class="login" routerLink="/login">Login</a>
     <ecommerce-mentoria-2-cart
       [quantity]="quantity()"
     ></ecommerce-mentoria-2-cart>
+    @if (authService.isAuthenticated()) {
     <a [href]="adminUrl"> Painel administrativo </a>
+    }@else{
+    <a class="login" routerLink="/login">Login</a>
+    }
   </div>
 </ecommerce-mentoria-2-header>
 <router-outlet></router-outlet>
