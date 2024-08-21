@@ -1,1 +1,1 @@
-export * from './lib/color-theme/color-theme.component';
+export * from './lib/components/theme-toggle/theme-toggle.component';
