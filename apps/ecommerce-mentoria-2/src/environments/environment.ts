@@ -1,4 +1,4 @@
 export const environment = {
-  admin_url: 'http://127.0.0.1:4300/',
-  ecommerce_url: 'http://127.0.0.1:4200/',
+  admin_url: 'http://localhost:4300/',
+  ecommerce_url: 'http://localhost:4200/',
 };

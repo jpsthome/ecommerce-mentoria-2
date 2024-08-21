@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,7 +24,6 @@ import { environment } from '../environments/environment';
     MatButton,
     MatMenuModule,
     MatIconModule,
-    AsyncPipe,
   ],
 })
 export class AppComponent implements OnInit {
@@ -39,7 +37,6 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
     this._router.navigateByUrl('/login');
   }
 }

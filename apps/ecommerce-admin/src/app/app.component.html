@@ -1,31 +1,13 @@
 @if (authService.isAuthenticated()) {
-<ecommerce-mentoria-2-header title="Painel Administrativo">
-  <div right class="right-content">
-    <button
-      data-testid="userMenu"
-      class="menu"
-      right
-      mat-button
-      [matMenuTriggerFor]="menu"
-      [disableRipple]="true"
-    >
-      <mat-icon>account_circle</mat-icon>
-      {{ authService.credentials()?.email }}
-    </button>
-    <mat-menu #menu="matMenu">
-      <a [href]="ecommerceUrl">
-        <button mat-menu-item>
-          <mat-icon>shoppping_cart</mat-icon>
-          E-commerce
-        </button>
-      </a>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        Sair
+  <ecommerce-mentoria-2-header title="Painel Administrativo">
+    <ecommerce-mentoria-2-user-menu (logout)="logout()">
+      <button mat-menu-item>
+        <a ecommerceMentoria2MenuItemAnchor [href]="ecommerceUrl">
+          <mat-icon>store</mat-icon>
+          Loja
+        </a>
       </button>
-    </mat-menu>
-  </div>
-</ecommerce-mentoria-2-header>
+    </ecommerce-mentoria-2-user-menu>
+  </ecommerce-mentoria-2-header>
 }
-
 <router-outlet></router-outlet>

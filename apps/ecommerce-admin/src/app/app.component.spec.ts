@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { credentialsMock } from '@ecommerce-mentoria-2/auth-data-access';
+import { UserMenuComponent } from '@ecommerce-mentoria-2/layout';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -10,9 +12,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        provideRouter([])
-      ]
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -29,33 +29,48 @@ describe('AppComponent', () => {
 
     fixture.detectChanges();
 
-    let headerEl = fixture.debugElement.query(By.css('ecommerce-mentoria-2-header'));
+    let headerEl = fixture.debugElement.query(
+      By.css('ecommerce-mentoria-2-header')
+    );
 
     expect(headerEl).toBeNull();
 
-    component.authService.credentials.set({
-      email: 'test@email',
-      password: 'test123'
-    });
+    component.authService.credentials.set(credentialsMock);
 
     fixture.detectChanges();
 
-    headerEl = fixture.debugElement.query(By.css('ecommerce-mentoria-2-header'));
+    headerEl = fixture.debugElement.query(
+      By.css('ecommerce-mentoria-2-header')
+    );
 
     expect(headerEl).toBeTruthy();
   });
 
   it('should render email in userMenu', () => {
-    const email = 'test@email';
-    component.authService.credentials.set({
-      email,
-      password: 'test123'
-    });
+    component.authService.credentials.set(credentialsMock);
 
     fixture.detectChanges();
 
-    const userMenuText = fixture.nativeElement.querySelector('[data-testid="userMenu"]').textContent;
+    const userMenuText = fixture.nativeElement.querySelector(
+      '[data-testid="userMenu"]'
+    ).textContent;
 
-    expect(userMenuText.trim()).toBe(`account_circle ${ email }`);
+    expect(userMenuText.trim()).toBe(`account_circle ${credentialsMock.email}`);
+  });
+
+  it('should logout account', () => {
+    component.authService.credentials.set(credentialsMock);
+
+    fixture.detectChanges();
+
+    const menuEl = fixture.debugElement.query(
+      By.css('ecommerce-mentoria-2-user-menu')
+    );
+
+    const navigateSpy = jest.spyOn(component['_router'], 'navigateByUrl');
+
+    (menuEl.componentInstance as UserMenuComponent).logout.emit();
+
+    expect(navigateSpy).toHaveBeenCalledWith('/login');
   });
 });
