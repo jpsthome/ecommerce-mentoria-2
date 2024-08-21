@@ -1,14 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { UserCredentials } from '../models/user-credentials.model';
+import { credentialsMock } from '../mocks';
 
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
-  const credentials: UserCredentials = {
-    email: 'test@email',
-    password: 'test123',
-  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -37,36 +33,36 @@ describe('AuthService', () => {
     expect(service.credentials()).toBeNull();
 
     getCookieSpy.mockReturnValue(
-      `ecommerce_token=${window.btoa(JSON.stringify(credentials))}`
+      `ecommerce_token=${window.btoa(JSON.stringify(credentialsMock))}`
     );
 
     service.checkAuthentication();
 
-    expect(service.credentials()).toEqual(credentials);
+    expect(service.credentials()).toEqual(credentialsMock);
   });
 
   it('should set cookie and update credentials', () => {
     const now = new Date();
     const expectedDate = new Date(now);
     expectedDate.setTime(now.getTime() + 30 * 60 * 1000);
-    const expectedCookie = window.btoa(JSON.stringify(credentials));
+    const expectedCookie = window.btoa(JSON.stringify(credentialsMock));
 
     jest.spyOn(service as never, '_setCookie');
     jest.useFakeTimers({ now });
 
-    service.login(credentials);
+    service.login(credentialsMock);
 
     expect(service['_setCookie']).toHaveBeenCalledWith(
       expectedCookie,
       expectedDate
     );
-    expect(service.credentials()).toEqual(credentials);
+    expect(service.credentials()).toEqual(credentialsMock);
   });
 
   it('should remove cookie and credentials', () => {
     jest.spyOn(service as never, '_setCookie');
 
-    service.credentials.set(credentials);
+    service.credentials.set(credentialsMock);
 
     service.logout();
 
@@ -75,7 +71,7 @@ describe('AuthService', () => {
   });
 
   it('should set cookie', () => {
-    const cookie = window.btoa(JSON.stringify(credentials));
+    const cookie = window.btoa(JSON.stringify(credentialsMock));
 
     const setCookieSpy = jest.spyOn(document, 'cookie', 'set');
 

@@ -1,0 +1,15 @@
+@if (authService.isAuthenticated()) {
+  <button class="user-menu" data-testid="userMenu" mat-button [matMenuTriggerFor]="menu" [disableRipple]="true">
+    <mat-icon>account_circle</mat-icon>
+    {{ authService.credentials()?.email }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <ng-content select="[mat-menu-item]"></ng-content>
+    <button data-testid="logoutBtn" mat-menu-item (click)="handleLogout()">
+      <mat-icon>logout</mat-icon>
+      Sair
+    </button>
+  </mat-menu>
+} @else {
+  <a mat-button class="user-menu" routerLink="/login" [disableRipple]="true">Acesse sua conta</a>
+}
