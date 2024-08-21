@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --parallel --target=serve --projects=ecommerce-mentoria-2,ecommerce-admin",
-    "build": "nx build",
+    "build": "nx run-many --parallel --target=build --projects=ecommerce-mentoria-2,ecommerce-admin",
     "test": "nx test",
     "prepare": "husky install"
   },
