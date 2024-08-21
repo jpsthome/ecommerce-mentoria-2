@@ -11,7 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@ecommerce-mentoria-2/auth-data-access';
 import { LayoutModule } from '@ecommerce-mentoria-2/layout';
-import { environment } from '../environments/enviroment';
+import { environment } from '../environments/environment';
 
 @Component({
   standalone: true,
