@@ -6,12 +6,12 @@ Este repositório contém um workspace Angular Nx com duas aplicações. Nx é u
 
 - [Primeiros Passos](#primeiros-passos)
 - [Aplicações](#aplicações)
-    - [Ecommerce Mentoria 2](#ecommerce-mentoria-2)
-    - [Ecommerce Admin](#ecommerce-admin)
+  - [Ecommerce Mentoria 2](#ecommerce-mentoria-2)
+  - [Ecommerce Admin](#ecommerce-admin)
 - [Desenvolvimento](#desenvolvimento)
-    - [Executando as aplicações](#executando-as-aplicações)
-    - [Buildando as aplicações](#buildando-as-aplicações)
-    - [Testes](#testes)
+  - [Executando as aplicações](#executando-as-aplicações)
+  - [Buildando as aplicações](#buildando-as-aplicações)
+  - [Testes](#testes)
 
 ## Primeiros Passos
 
@@ -38,11 +38,13 @@ npm install
 
 - **Path**: `apps/ecommerce-mentoria-2`
 - **Descrição**: Ecommerce Mentoria 2 é a aplicação padrão, projetada para fornecer a loja virtual para o cliente.
+- [Acesse aqui](https://ecommerce-mentoria-2-beta.vercel.app/home)
 
 ### Ecommerce Admin
 
 - **Path**: `apps/ecommerce-admin`
 - **Descrição**: Ecommerce Admin é a aplicação onde é possível gerenciar os usuários da plataforma.
+- [Acesse aqui](https://ecommerce-admin-one-xi.vercel.app/home)
 
 ## Desenvolvimento
 
