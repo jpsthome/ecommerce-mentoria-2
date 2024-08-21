@@ -1,11 +1,17 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@ecommerce-mentoria-2/auth-data-access';
 import { LayoutModule } from '@ecommerce-mentoria-2/layout';
+import { environment } from '../environments/enviroment';
 
 @Component({
   standalone: true,
@@ -19,12 +25,14 @@ import { LayoutModule } from '@ecommerce-mentoria-2/layout';
     MatButton,
     MatMenuModule,
     MatIconModule,
-    AsyncPipe
-  ]
+    AsyncPipe,
+  ],
 })
 export class AppComponent implements OnInit {
   private readonly _router = inject(Router);
   readonly authService = inject(AuthService);
+
+  ecommerceUrl = environment.ecommerce_url;
 
   ngOnInit(): void {
     this.authService.checkAuthentication();
