@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { User } from '@ecommerce-mentoria-2/user';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -22,7 +28,7 @@ import {
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   animations: [
     trigger('detailExpand', [
@@ -44,7 +50,7 @@ export class UserTableComponent {
   @Input({ required: true }) set users(users: User[]) {
     this.dataSource = new MatTableDataSource<User>(users);
     this._cdr.detectChanges();
-  };
+  }
 
   expandedElement: User | null = null;
   displayedColumns: string[] = [
