@@ -21,6 +21,7 @@
           "apps/ecommerce-mentoria-2/src/assets"
         ],
         "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
           "apps/ecommerce-mentoria-2/src/styles.scss"
         ],
         "scripts": []
