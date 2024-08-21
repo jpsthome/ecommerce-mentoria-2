@@ -21,13 +21,10 @@ describe('AuthService', () => {
 
   it('should dispatch email changed', () => {
     const expectedEmail = 'email@mail.com';
-    let resultEmail = '';
-
-    service.email$.subscribe((email) => resultEmail = email as string);
 
     service.setEmail(expectedEmail);
 
-    expect(expectedEmail).toBe(resultEmail);
+    expect(expectedEmail).toBe(service.email());
   });
 
   it('should set credentials when have cookie', () => {

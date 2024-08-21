@@ -1,11 +1,11 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { emailInsertedGuard } from './email-inserted.guard';
-import { signal } from '@angular/core';
 
 describe('emailInsertedGuard', () => {
-  it('should return true when user is not truthy', () => {
+  it('should navigate to email screen when user is falsy', () => {
     TestBed.configureTestingModule({
       providers: [provideRouter([])],
     });
@@ -14,21 +14,26 @@ describe('emailInsertedGuard', () => {
       useValue: { email: signal(null) },
     });
 
-    const guard = TestBed.runInInjectionContext(emailInsertedGuard);
-    expect(guard).toBeTruthy();
+    const router = TestBed.inject(Router);
+
+    jest.spyOn(router, 'navigateByUrl')
+
+    TestBed.runInInjectionContext(emailInsertedGuard);
+
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/login/email');
   });
 
-  it('should NOT return true when user is truthy', () => {
+  it('should return true when user is truthy', () => {
     TestBed.configureTestingModule({
       providers: [provideRouter([])],
     });
 
     TestBed.overrideProvider(AuthService, {
-      useValue: { email: signal(true) },
+      useValue: { email: signal('test@email') },
     });
 
     const guard = TestBed.runInInjectionContext(emailInsertedGuard);
 
-    expect(guard).toBeFalsy();
+    expect(guard).toBeTruthy();
   });
 });

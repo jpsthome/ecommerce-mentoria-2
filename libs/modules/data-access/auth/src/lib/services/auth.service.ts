@@ -1,5 +1,4 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { UserCredentials } from '../models';
 
 @Injectable({
@@ -7,15 +6,13 @@ import { UserCredentials } from '../models';
 })
 export class AuthService {
   private readonly COOKIE_AUTHENTICATION_KEY = 'ecommerce_token';
-  private emailSubject = new BehaviorSubject<string | null>(null);
 
   credentials = signal<UserCredentials | null>(null);
   isAuthenticated = computed(() => !!this.credentials());
-
-  email$ = this.emailSubject.asObservable();
+  email = signal<string | null>(null);
 
   setEmail(email: string): void {
-    this.emailSubject.next(email);
+    this.email.set(email);
   }
 
   checkAuthentication(): void {
