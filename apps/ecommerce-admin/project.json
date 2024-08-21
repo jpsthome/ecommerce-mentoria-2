@@ -10,7 +10,7 @@
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ecommerce-admin",
+        "outputPath": "dist/ecommerce-admin",
         "index": "apps/ecommerce-admin/src/index.html",
         "browser": "apps/ecommerce-admin/src/main.ts",
         "polyfills": ["zone.js"],

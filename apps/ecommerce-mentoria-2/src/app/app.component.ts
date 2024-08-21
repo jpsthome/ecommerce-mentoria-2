@@ -1,4 +1,4 @@
-import { environment } from './../environments/enviroment';
+import { environment } from '../environments/environment';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
