@@ -7,7 +7,13 @@
   <ng-container matColumnDef="avatar">
     <th mat-header-cell *matHeaderCellDef [style.width.%]="10"></th>
     <td mat-cell *matCellDef="let element">
-      <img [ngSrc]="element.avatar" width="50" height="50" alt="Avatar de {{ element.name }}" class="user-avatar" />
+      <img
+        [ngSrc]="element.avatar"
+        width="50"
+        height="50"
+        alt="Avatar de {{ element.name }}"
+        class="user-avatar"
+      />
     </td>
   </ng-container>
 
@@ -28,52 +34,19 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="expand" [style.width.%]="5">
+  <ng-container matColumnDef="actions" [style.width.%]="5">
     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
     <td mat-cell *matCellDef="let element">
-      <button
-        data-testid="expandButton"
+      <a
         mat-icon-button
-        aria-label="expand row"
-        (click)="
-          expandedElement = expandedElement === element ? null : element;
-          $event.stopPropagation()
-        "
+        [routerLink]="['/users', element.id]"
+        matTooltip="Detalhar usuário"
       >
-        @if (expandedElement === element) {
-          <mat-icon>keyboard_arrow_up</mat-icon>
-        } @else {
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        }
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="expandedDetail">
-    <td
-      mat-cell
-      *matCellDef="let element"
-      [attr.colspan]="displayedColumns.length"
-    >
-      <div
-        class="element-detail"
-        [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
-      >
-        <p>{{ element.biography }}</p>
-      </div>
+        <mat-icon>list_alt</mat-icon>
+      </a>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let element; columns: displayedColumns"
-    class="element-row"
-    [class.expanded-row]="expandedElement === element"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: ['expandedDetail']"
-    class="detail-row"
-  ></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
 </table>

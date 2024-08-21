@@ -10,13 +10,8 @@ import { User } from '@ecommerce-mentoria-2/user';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   standalone: true,
@@ -29,16 +24,8 @@ import {
     MatIconModule,
     MatButtonModule,
     NgOptimizedImage,
-  ],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
-    ]),
+    RouterModule,
+    MatTooltipModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -52,12 +39,11 @@ export class UserTableComponent {
     this._cdr.detectChanges();
   }
 
-  expandedElement: User | null = null;
   displayedColumns: string[] = [
     'avatar',
     'name',
     'email',
     'createdAt',
-    'expand',
+    'actions',
   ];
 }

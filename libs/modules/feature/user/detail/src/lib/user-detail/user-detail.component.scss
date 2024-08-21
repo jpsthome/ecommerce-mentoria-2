@@ -1,0 +1,33 @@
+.container {
+  max-width: 600px;
+  padding: 2rem;
+  margin: auto;
+}
+
+.card {
+  &__userId {
+    color: #bbb;
+    font-style: italic;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+  }
+
+  &__bio {
+    margin-top: 1.5rem;
+  }
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

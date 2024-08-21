@@ -1,16 +1,18 @@
 import { User } from '../models/user.model';
 
+export const userMock: User = {
+  createdAt: '2024-03-04T06:06:30.832Z',
+  name: 'Lila Kuhic',
+  avatar:
+    'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/216.jpg',
+  email: 'Jaydon44@gmail.com',
+  biography:
+    'Dicta quaerat nemo repellendus adipisci. Hic iusto similique sint. Voluptate quam minus aliquam maiores tenetur excepturi. Itaque doloribus unde accusantium corporis possimus. Accusantium voluptatum consequuntur.',
+  id: '1',
+};
+
 export const usersMock: User[] = [
-  {
-    createdAt: '2024-03-04T06:06:30.832Z',
-    name: 'Lila Kuhic',
-    avatar:
-      'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/216.jpg',
-    email: 'Jaydon44@gmail.com',
-    biography:
-      'Dicta quaerat nemo repellendus adipisci. Hic iusto similique sint. Voluptate quam minus aliquam maiores tenetur excepturi. Itaque doloribus unde accusantium corporis possimus. Accusantium voluptatum consequuntur.',
-    id: '1',
-  },
+  userMock,
   {
     createdAt: '2024-03-04T20:46:04.785Z',
     name: 'Al Boehm',
