@@ -1,13 +1,13 @@
 @if (authService.isAuthenticated()) {
-  <ecommerce-mentoria-2-header title="Painel Administrativo">
-    <ecommerce-mentoria-2-user-menu (logout)="logout()">
-      <button mat-menu-item>
-        <a ecommerceMentoria2MenuItemAnchor [href]="ecommerceUrl">
-          <mat-icon>store</mat-icon>
-          Loja
-        </a>
-      </button>
-    </ecommerce-mentoria-2-user-menu>
-  </ecommerce-mentoria-2-header>
+<ecommerce-mentoria-2-header title="Painel Administrativo">
+  <ecommerce-mentoria-2-user-menu (logout)="logout()">
+    <button mat-menu-item>
+      <a ecommerceMentoria2MenuItemAnchor [href]="ecommerceUrl">
+        <mat-icon>store</mat-icon>
+        Loja
+      </a>
+    </button>
+  </ecommerce-mentoria-2-user-menu>
+</ecommerce-mentoria-2-header>
 }
 <router-outlet></router-outlet>
