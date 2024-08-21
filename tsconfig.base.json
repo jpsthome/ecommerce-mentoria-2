@@ -46,6 +46,12 @@
       "@ecommerce-mentoria-2/user": [
         "libs/modules/data-access/user/src/index.ts"
       ],
+      "@ecommerce-mentoria-2/user-detail": [
+        "libs/modules/feature/user/detail/src/index.ts"
+      ],
+      "@ecommerce-mentoria-2/user-feature": [
+        "libs/modules/feature/user/src/index.ts"
+      ],
       "@ecommerce-mentoria-2/user-ui": ["libs/modules/ui/user/src/index.ts"]
     }
   },

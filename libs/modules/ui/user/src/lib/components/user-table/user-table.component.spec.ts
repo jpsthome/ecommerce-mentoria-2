@@ -4,8 +4,12 @@ import { LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { usersMock } from '@ecommerce-mentoria-2/user';
+import { userMock } from '@ecommerce-mentoria-2/user';
 import { UserTableComponent } from './user-table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { NavigationStart, provideRouter, Router } from '@angular/router';
+import { filter, tap } from 'rxjs';
 
 registerLocaleData(ptBr);
 
@@ -13,25 +17,26 @@ describe('UserTableComponent', () => {
   let component: UserTableComponent;
   let fixture: ComponentFixture<UserTableComponent>;
 
-  const USER_MOCK = usersMock[0];
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         UserTableComponent,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        MatButtonModule,
+        MatIconModule,
       ],
       providers: [
         {
           provide: LOCALE_ID,
-          useValue: 'pt'
-        }
-      ]
+          useValue: 'pt',
+        },
+        provideRouter([]),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserTableComponent);
     component = fixture.componentInstance;
-    component.users = [USER_MOCK];
+    component.users = [userMock];
     fixture.detectChanges();
   });
 
@@ -45,75 +50,51 @@ describe('UserTableComponent', () => {
       'name',
       'email',
       'createdAt',
-      'expand'
+      'actions',
     ]);
   });
 
   it('should contain table headers', () => {
-    const headers = fixture.debugElement.queryAll(By.css('tr > th')).map(el => el.nativeElement.textContent.trim());
-    expect(headers).toEqual([
-      '',
-      'Nome',
-      'E-mail',
-      'Criado em',
-      ''
-    ]);
+    const headers = fixture.debugElement
+      .queryAll(By.css('tr > th'))
+      .map((el) => el.nativeElement.textContent.trim());
+    expect(headers).toEqual(['', 'Nome', 'E-mail', 'Criado em', '']);
   });
 
   it('should contain table detail rows', () => {
     const rows = fixture.debugElement.queryAll(By.css('tbody > tr'));
 
-    expect(rows.length).toBe(2);
+    expect(rows.length).toBe(1);
 
-    const [elements, expandEl] = rows;
+    const [elements] = rows;
 
-    const [
-      avatarEl,
-      nameEl,
-      emailEl,
-      createdAtEl,
-      expandButtonEl
-    ] = elements.queryAll(By.css('td'));
+    const [avatarEl, nameEl, emailEl, createdAtEl, actionsEl] =
+      elements.queryAll(By.css('td'));
 
     const imgEl = avatarEl.query(By.css('img'));
 
-    expect(imgEl.properties['src']).toBe(USER_MOCK.avatar);
-    expect(imgEl.properties['alt']).toBe(`Avatar de ${ USER_MOCK.name }`);
+    expect(imgEl.properties['src']).toBe(userMock.avatar);
+    expect(imgEl.properties['alt']).toBe(`Avatar de ${userMock.name}`);
 
-    expect(nameEl.nativeElement.textContent.trim()).toBe(USER_MOCK.name);
-    expect(emailEl.nativeElement.textContent.trim()).toBe(USER_MOCK.email);
+    expect(nameEl.nativeElement.textContent.trim()).toBe(userMock.name);
+    expect(emailEl.nativeElement.textContent.trim()).toBe(userMock.email);
     expect(createdAtEl.nativeElement.textContent.trim()).toBe('04/03/2024');
-    expect(expandButtonEl.nativeElement.textContent.trim()).toBe('keyboard_arrow_down');
-
-    const expandedDataEl = expandEl.query(By.css('td'));
-
-    expect(expandedDataEl.nativeElement.textContent.trim()).toBe(USER_MOCK.biography);
+    expect(actionsEl.nativeElement.textContent.trim()).toContain('list_alt');
   });
 
-  it('should change expand icon when row is clicked', () => {
-    const buttonEl = fixture.nativeElement.querySelector('[data-testid="expandButton"]') as HTMLButtonElement;
+  it('should redirect to user detail', () => {
+    const router = TestBed.inject(Router);
+    let navigatedUrl = '';
 
-    expect(buttonEl.textContent).toBe('keyboard_arrow_down');
+    router.events
+      .pipe(
+        filter((event) => event instanceof NavigationStart),
+        tap((event) => (navigatedUrl = (event as NavigationStart).url))
+      )
+      .subscribe();
 
-    buttonEl.click();
+    fixture.nativeElement.querySelector('a').click();
 
-    fixture.detectChanges();
-
-    expect(buttonEl.textContent).toBe('keyboard_arrow_up');
-  });
-
-  it('should expand detail div when clicked expand button', () => {
-    const buttonEl = fixture.nativeElement.querySelector('[data-testid="expandButton"]') as HTMLButtonElement;
-    const detailEl = fixture.debugElement.query(By.css('.element-detail'));
-
-    expect(buttonEl.textContent).toBe('keyboard_arrow_down');
-
-    expect(detailEl.properties['@detailExpand']).toBe('collapsed');
-
-    buttonEl.click();
-
-    fixture.detectChanges();
-
-    expect(detailEl.properties['@detailExpand']).toBe('expanded');
+    expect(navigatedUrl).toBe(`/users/${userMock.id}`);
   });
 });

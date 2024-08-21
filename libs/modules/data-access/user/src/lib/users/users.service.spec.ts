@@ -1,4 +1,4 @@
-import { usersMock } from './../mocks/users.mock';
+import { userMock, usersMock } from './../mocks/users.mock';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -34,5 +34,17 @@ describe('UsersService', () => {
     request.flush(usersMock);
     expect(request.request.method).toBe('GET');
     expect(result!).toEqual(usersMock);
+  });
+
+  it('should get users', () => {
+    const url = `${service.apiUrl}/users/1`;
+    let result: User;
+
+    service.getUserById('1').subscribe((users) => (result = users));
+
+    const request = httpMock.expectOne(url);
+    request.flush(userMock);
+    expect(request.request.method).toBe('GET');
+    expect(result!).toEqual(userMock);
   });
 });
