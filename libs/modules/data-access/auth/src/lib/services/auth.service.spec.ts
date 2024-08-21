@@ -7,7 +7,7 @@ describe('AuthService', () => {
   let service: AuthService;
   const credentials: UserCredentials = {
     email: 'test@email',
-    password: 'test123'
+    password: 'test123',
   };
 
   beforeEach(() => {
@@ -36,7 +36,9 @@ describe('AuthService', () => {
 
     expect(service.credentials()).toBeNull();
 
-    getCookieSpy.mockReturnValue(`ecommerce_token=${ window.btoa(JSON.stringify(credentials)) }`);
+    getCookieSpy.mockReturnValue(
+      `ecommerce_token=${window.btoa(JSON.stringify(credentials))}`
+    );
 
     service.checkAuthentication();
 
@@ -46,7 +48,7 @@ describe('AuthService', () => {
   it('should set cookie and update credentials', () => {
     const now = new Date();
     const expectedDate = new Date(now);
-    expectedDate.setTime(now.getTime() + (30 * 60 * 1000));
+    expectedDate.setTime(now.getTime() + 30 * 60 * 1000);
     const expectedCookie = window.btoa(JSON.stringify(credentials));
 
     jest.spyOn(service as never, '_setCookie');
@@ -54,7 +56,10 @@ describe('AuthService', () => {
 
     service.login(credentials);
 
-    expect(service['_setCookie']).toHaveBeenCalledWith(expectedCookie, expectedDate);
+    expect(service['_setCookie']).toHaveBeenCalledWith(
+      expectedCookie,
+      expectedDate
+    );
     expect(service.credentials()).toEqual(credentials);
   });
 
@@ -74,8 +79,10 @@ describe('AuthService', () => {
 
     const setCookieSpy = jest.spyOn(document, 'cookie', 'set');
 
-    service['_setCookie'](cookie, new Date('2020-01-01 00:00'));
+    service['_setCookie'](cookie, new Date('2020-01-01 00:00 GMT+00:00 '));
 
-    expect(setCookieSpy).toHaveBeenCalledWith(`ecommerce_token=${ cookie }; expires=Wed, 01 Jan 2020 03:00:00 GMT; path=/`);
+    expect(setCookieSpy).toHaveBeenCalledWith(
+      `ecommerce_token=${cookie}; expires=Wed, 01 Jan 2020 00:00:00 GMT; path=/`
+    );
   });
 });
